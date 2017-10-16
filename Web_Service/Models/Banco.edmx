@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Trabalho_DADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="cat_cod" />
+          </Key>
+          <Property Name="cat_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_nome" Type="varchar" MaxLength="95" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cli_cod" />
+          </Key>
+          <Property Name="cli_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cli_nome" Type="varchar" MaxLength="95" />
+          <Property Name="cli_cpfcnpj" Type="varchar" MaxLength="95" />
+          <Property Name="cli_rgie" Type="varchar" MaxLength="95" />
+          <Property Name="cli_rsocial" Type="varchar" MaxLength="95" />
+          <Property Name="cli_tipo" Type="varchar" MaxLength="20" />
+          <Property Name="cli_cep" Type="varchar" MaxLength="20" />
+          <Property Name="cli_endereco" Type="varchar" MaxLength="95" />
+          <Property Name="cli_bairro" Type="varchar" MaxLength="95" />
+          <Property Name="cli_fone" Type="varchar" MaxLength="95" />
+          <Property Name="cli_cel" Type="varchar" MaxLength="95" />
+          <Property Name="cli_email" Type="varchar" MaxLength="95" />
+          <Property Name="cli_endnumero" Type="varchar" MaxLength="10" />
+          <Property Name="cli_cidade" Type="char" MaxLength="18" />
+          <Property Name="cli_estado" Type="char" MaxLength="18" />
+        </EntityType>
+        <EntityType Name="compra">
+          <Key>
+            <PropertyRef Name="com_cod" />
+          </Key>
+          <Property Name="com_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="com_data" Type="datetime" />
+          <Property Name="com_nfiscal" Type="int" />
+          <Property Name="com_total" Type="money" />
+          <Property Name="com_nparcelas" Type="int" />
+          <Property Name="com_status" Type="int" />
+          <Property Name="for_cod" Type="int" />
+          <Property Name="tpa_cod" Type="int" />
+        </EntityType>
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="for_cod" />
+          </Key>
+          <Property Name="for_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="for_nome" Type="varchar" MaxLength="95" />
+          <Property Name="for_rsocial" Type="varchar" MaxLength="95" />
+          <Property Name="for_ie" Type="varchar" MaxLength="95" />
+          <Property Name="for_cnpj" Type="varchar" MaxLength="95" />
+          <Property Name="for_cep" Type="varchar" MaxLength="95" />
+          <Property Name="for_endereco" Type="varchar" MaxLength="95" />
+          <Property Name="for_bairro" Type="varchar" MaxLength="95" />
+          <Property Name="for_fone" Type="varchar" MaxLength="95" />
+          <Property Name="for_cel" Type="varchar" MaxLength="95" />
+          <Property Name="for_email" Type="varchar" MaxLength="95" />
+          <Property Name="for_endnumero" Type="char" MaxLength="18" />
+          <Property Name="for_cidade" Type="char" MaxLength="18" />
+          <Property Name="for_estado" Type="char" MaxLength="18" />
+        </EntityType>
+        <EntityType Name="itenscompra">
+          <Key>
+            <PropertyRef Name="itc_cod" />
+            <PropertyRef Name="com_cod" />
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="itc_cod" Type="int" Nullable="false" />
+          <Property Name="itc_qtde" Type="float" />
+          <Property Name="itc_valor" Type="money" />
+          <Property Name="com_cod" Type="int" Nullable="false" />
+          <Property Name="pro_cod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="itensvenda">
+          <Key>
+            <PropertyRef Name="itv_cod" />
+            <PropertyRef Name="ven_cod" />
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="itv_cod" Type="int" Nullable="false" />
+          <Property Name="itv_qtde" Type="float" />
+          <Property Name="itv_valor" Type="money" />
+          <Property Name="ven_cod" Type="int" Nullable="false" />
+          <Property Name="pro_cod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parcelascompra">
+          <Key>
+            <PropertyRef Name="pco_cod" />
+            <PropertyRef Name="com_cod" />
+          </Key>
+          <Property Name="pco_cod" Type="int" Nullable="false" />
+          <Property Name="pco_valor" Type="money" />
+          <Property Name="pco_datapagto" Type="date" />
+          <Property Name="pco_datavecto" Type="date" />
+          <Property Name="com_cod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parcelasvenda">
+          <Key>
+            <PropertyRef Name="ven_cod" />
+            <PropertyRef Name="pve_cod" />
+          </Key>
+          <Property Name="ven_cod" Type="int" Nullable="false" />
+          <Property Name="pve_cod" Type="int" Nullable="false" />
+          <Property Name="pve_valor" Type="money" />
+          <Property Name="pve_datapagto" Type="date" />
+          <Property Name="pve_datavecto" Type="date" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="pro_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pro_nome" Type="varchar" MaxLength="95" />
+          <Property Name="pro_descricao" Type="text" />
+          <Property Name="pro_foto" Type="image" />
+          <Property Name="pro_valorpago" Type="money" />
+          <Property Name="pro_valorvenda" Type="money" />
+          <Property Name="pro_qtde" Type="float" />
+          <Property Name="umed_cod" Type="int" />
+          <Property Name="cat_cod" Type="int" />
+          <Property Name="scat_cod" Type="int" />
+        </EntityType>
+        <EntityType Name="subcategoria">
+          <Key>
+            <PropertyRef Name="scat_cod" />
+          </Key>
+          <Property Name="scat_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scat_nome" Type="varchar" MaxLength="95" />
+          <Property Name="cat_cod" Type="int" />
+        </EntityType>
+        <EntityType Name="tipopagamento">
+          <Key>
+            <PropertyRef Name="tpa_cod" />
+          </Key>
+          <Property Name="tpa_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tpa_nome" Type="varchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="undmedida">
+          <Key>
+            <PropertyRef Name="umed_cod" />
+          </Key>
+          <Property Name="umed_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="umed_nome" Type="varchar" MaxLength="95" />
+        </EntityType>
+        <EntityType Name="venda">
+          <Key>
+            <PropertyRef Name="ven_cod" />
+          </Key>
+          <Property Name="ven_cod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ven_data" Type="datetime" />
+          <Property Name="ven_nfiscal" Type="int" />
+          <Property Name="ven_total" Type="money" />
+          <Property Name="ven_nparcelas" Type="int" />
+          <Property Name="ven_status" Type="int" />
+          <Property Name="cli_cod" Type="int" />
+          <Property Name="tpa_cod" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Trabalho_DAD.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="R_10">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="cat_cod" />
+            </Principal>
+            <Dependent Role="subcategoria">
+              <PropertyRef Name="cat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_11">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="cat_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="cat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategoria">
+              <PropertyRef Name="scat_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="scat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_13">
+          <End Role="venda" Type="Self.venda" Multiplicity="1" />
+          <End Role="itensvenda" Type="Self.itensvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venda">
+              <PropertyRef Name="ven_cod" />
+            </Principal>
+            <Dependent Role="itensvenda">
+              <PropertyRef Name="ven_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="itensvenda" Type="Self.itensvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="pro_cod" />
+            </Principal>
+            <Dependent Role="itensvenda">
+              <PropertyRef Name="pro_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_15">
+          <End Role="compra" Type="Self.compra" Multiplicity="1" />
+          <End Role="itenscompra" Type="Self.itenscompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compra">
+              <PropertyRef Name="com_cod" />
+            </Principal>
+            <Dependent Role="itenscompra">
+              <PropertyRef Name="com_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="itenscompra" Type="Self.itenscompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="pro_cod" />
+            </Principal>
+            <Dependent Role="itenscompra">
+              <PropertyRef Name="pro_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_20">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="venda" Type="Self.venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cli_cod" />
+            </Principal>
+            <Dependent Role="venda">
+              <PropertyRef Name="cli_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="fornecedor" Type="Self.fornecedor" Multiplicity="0..1" />
+          <End Role="compra" Type="Self.compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="for_cod" />
+            </Principal>
+            <Dependent Role="compra">
+              <PropertyRef Name="for_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Role="venda" Type="Self.venda" Multiplicity="1" />
+          <End Role="parcelasvenda" Type="Self.parcelasvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venda">
+              <PropertyRef Name="ven_cod" />
+            </Principal>
+            <Dependent Role="parcelasvenda">
+              <PropertyRef Name="ven_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Role="tipopagamento" Type="Self.tipopagamento" Multiplicity="0..1" />
+          <End Role="venda" Type="Self.venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipopagamento">
+              <PropertyRef Name="tpa_cod" />
+            </Principal>
+            <Dependent Role="venda">
+              <PropertyRef Name="tpa_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_24">
+          <End Role="tipopagamento" Type="Self.tipopagamento" Multiplicity="0..1" />
+          <End Role="compra" Type="Self.compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipopagamento">
+              <PropertyRef Name="tpa_cod" />
+            </Principal>
+            <Dependent Role="compra">
+              <PropertyRef Name="tpa_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_25">
+          <End Role="compra" Type="Self.compra" Multiplicity="1" />
+          <End Role="parcelascompra" Type="Self.parcelascompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compra">
+              <PropertyRef Name="com_cod" />
+            </Principal>
+            <Dependent Role="parcelascompra">
+              <PropertyRef Name="com_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_9">
+          <End Role="undmedida" Type="Self.undmedida" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="undmedida">
+              <PropertyRef Name="umed_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="umed_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Trabalho_DADModelStoreContainer">
+          <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="compra" EntityType="Self.compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fornecedor" EntityType="Self.fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="itenscompra" EntityType="Self.itenscompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="itensvenda" EntityType="Self.itensvenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parcelascompra" EntityType="Self.parcelascompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parcelasvenda" EntityType="Self.parcelasvenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produto" EntityType="Self.produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subcategoria" EntityType="Self.subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipopagamento" EntityType="Self.tipopagamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="undmedida" EntityType="Self.undmedida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="venda" EntityType="Self.venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="subcategoria" EntitySet="subcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="R_11" Association="Self.R_11">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="Self.R_12">
+            <End Role="subcategoria" EntitySet="subcategoria" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="R_13" Association="Self.R_13">
+            <End Role="venda" EntitySet="venda" />
+            <End Role="itensvenda" EntitySet="itensvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="itensvenda" EntitySet="itensvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_15" Association="Self.R_15">
+            <End Role="compra" EntitySet="compra" />
+            <End Role="itenscompra" EntitySet="itenscompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="Self.R_17">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="itenscompra" EntitySet="itenscompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_20" Association="Self.R_20">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="venda" EntitySet="venda" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="Self.R_21">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="compra" EntitySet="compra" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="Self.R_22">
+            <End Role="venda" EntitySet="venda" />
+            <End Role="parcelasvenda" EntitySet="parcelasvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="Self.R_23">
+            <End Role="tipopagamento" EntitySet="tipopagamento" />
+            <End Role="venda" EntitySet="venda" />
+          </AssociationSet>
+          <AssociationSet Name="R_24" Association="Self.R_24">
+            <End Role="tipopagamento" EntitySet="tipopagamento" />
+            <End Role="compra" EntitySet="compra" />
+          </AssociationSet>
+          <AssociationSet Name="R_25" Association="Self.R_25">
+            <End Role="compra" EntitySet="compra" />
+            <End Role="parcelascompra" EntitySet="parcelascompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_9" Association="Self.R_9">
+            <End Role="undmedida" EntitySet="undmedida" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Trabalho_DADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="cat_cod" />
+          </Key>
+          <Property Name="cat_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="subcategoria" Relationship="Self.R_10" FromRole="categoria" ToRole="subcategoria" />
+          <NavigationProperty Name="produto" Relationship="Self.R_11" FromRole="categoria" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="cli_cod" />
+          </Key>
+          <Property Name="cli_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cli_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_cpfcnpj" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_rgie" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_rsocial" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cli_cep" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cli_endereco" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_bairro" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_fone" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_cel" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_email" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cli_endnumero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cli_cidade" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="cli_estado" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="venda" Relationship="Self.R_20" FromRole="cliente" ToRole="venda" />
+        </EntityType>
+        <EntityType Name="compra">
+          <Key>
+            <PropertyRef Name="com_cod" />
+          </Key>
+          <Property Name="com_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="com_data" Type="DateTime" Precision="3" />
+          <Property Name="com_nfiscal" Type="Int32" />
+          <Property Name="com_total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="com_nparcelas" Type="Int32" />
+          <Property Name="com_status" Type="Int32" />
+          <Property Name="for_cod" Type="Int32" />
+          <Property Name="tpa_cod" Type="Int32" />
+          <NavigationProperty Name="itenscompra" Relationship="Self.R_15" FromRole="compra" ToRole="itenscompra" />
+          <NavigationProperty Name="fornecedor" Relationship="Self.R_21" FromRole="compra" ToRole="fornecedor" />
+          <NavigationProperty Name="tipopagamento" Relationship="Self.R_24" FromRole="compra" ToRole="tipopagamento" />
+          <NavigationProperty Name="parcelascompra" Relationship="Self.R_25" FromRole="compra" ToRole="parcelascompra" />
+        </EntityType>
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="for_cod" />
+          </Key>
+          <Property Name="for_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="for_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_rsocial" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_ie" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_cnpj" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_cep" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_endereco" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_bairro" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_fone" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_cel" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_email" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="for_endnumero" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="for_cidade" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="for_estado" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="compra" Relationship="Self.R_21" FromRole="fornecedor" ToRole="compra" />
+        </EntityType>
+        <EntityType Name="itenscompra">
+          <Key>
+            <PropertyRef Name="itc_cod" />
+            <PropertyRef Name="com_cod" />
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="itc_cod" Type="Int32" Nullable="false" />
+          <Property Name="itc_qtde" Type="Double" />
+          <Property Name="itc_valor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="com_cod" Type="Int32" Nullable="false" />
+          <Property Name="pro_cod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="compra" Relationship="Self.R_15" FromRole="itenscompra" ToRole="compra" />
+          <NavigationProperty Name="produto" Relationship="Self.R_17" FromRole="itenscompra" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="itensvenda">
+          <Key>
+            <PropertyRef Name="itv_cod" />
+            <PropertyRef Name="ven_cod" />
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="itv_cod" Type="Int32" Nullable="false" />
+          <Property Name="itv_qtde" Type="Double" />
+          <Property Name="itv_valor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ven_cod" Type="Int32" Nullable="false" />
+          <Property Name="pro_cod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="venda" Relationship="Self.R_13" FromRole="itensvenda" ToRole="venda" />
+          <NavigationProperty Name="produto" Relationship="Self.R_14" FromRole="itensvenda" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="parcelascompra">
+          <Key>
+            <PropertyRef Name="pco_cod" />
+            <PropertyRef Name="com_cod" />
+          </Key>
+          <Property Name="pco_cod" Type="Int32" Nullable="false" />
+          <Property Name="pco_valor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pco_datapagto" Type="DateTime" Precision="0" />
+          <Property Name="pco_datavecto" Type="DateTime" Precision="0" />
+          <Property Name="com_cod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="compra" Relationship="Self.R_25" FromRole="parcelascompra" ToRole="compra" />
+        </EntityType>
+        <EntityType Name="parcelasvenda">
+          <Key>
+            <PropertyRef Name="ven_cod" />
+            <PropertyRef Name="pve_cod" />
+          </Key>
+          <Property Name="ven_cod" Type="Int32" Nullable="false" />
+          <Property Name="pve_cod" Type="Int32" Nullable="false" />
+          <Property Name="pve_valor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pve_datapagto" Type="DateTime" Precision="0" />
+          <Property Name="pve_datavecto" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="venda" Relationship="Self.R_22" FromRole="parcelasvenda" ToRole="venda" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="pro_cod" />
+          </Key>
+          <Property Name="pro_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pro_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="pro_descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pro_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="pro_valorpago" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pro_valorvenda" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pro_qtde" Type="Double" />
+          <Property Name="umed_cod" Type="Int32" />
+          <Property Name="cat_cod" Type="Int32" />
+          <Property Name="scat_cod" Type="Int32" />
+          <NavigationProperty Name="categoria" Relationship="Self.R_11" FromRole="produto" ToRole="categoria" />
+          <NavigationProperty Name="itenscompra" Relationship="Self.R_17" FromRole="produto" ToRole="itenscompra" />
+          <NavigationProperty Name="itensvenda" Relationship="Self.R_14" FromRole="produto" ToRole="itensvenda" />
+          <NavigationProperty Name="subcategoria" Relationship="Self.R_12" FromRole="produto" ToRole="subcategoria" />
+          <NavigationProperty Name="undmedida" Relationship="Self.R_9" FromRole="produto" ToRole="undmedida" />
+        </EntityType>
+        <EntityType Name="subcategoria">
+          <Key>
+            <PropertyRef Name="scat_cod" />
+          </Key>
+          <Property Name="scat_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scat_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <Property Name="cat_cod" Type="Int32" />
+          <NavigationProperty Name="categoria" Relationship="Self.R_10" FromRole="subcategoria" ToRole="categoria" />
+          <NavigationProperty Name="produto" Relationship="Self.R_12" FromRole="subcategoria" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="tipopagamento">
+          <Key>
+            <PropertyRef Name="tpa_cod" />
+          </Key>
+          <Property Name="tpa_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tpa_nome" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="compra" Relationship="Self.R_24" FromRole="tipopagamento" ToRole="compra" />
+          <NavigationProperty Name="venda" Relationship="Self.R_23" FromRole="tipopagamento" ToRole="venda" />
+        </EntityType>
+        <EntityType Name="undmedida">
+          <Key>
+            <PropertyRef Name="umed_cod" />
+          </Key>
+          <Property Name="umed_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="umed_nome" Type="String" MaxLength="95" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="produto" Relationship="Self.R_9" FromRole="undmedida" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="venda">
+          <Key>
+            <PropertyRef Name="ven_cod" />
+          </Key>
+          <Property Name="ven_cod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ven_data" Type="DateTime" Precision="3" />
+          <Property Name="ven_nfiscal" Type="Int32" />
+          <Property Name="ven_total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ven_nparcelas" Type="Int32" />
+          <Property Name="ven_status" Type="Int32" />
+          <Property Name="cli_cod" Type="Int32" />
+          <Property Name="tpa_cod" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.R_20" FromRole="venda" ToRole="cliente" />
+          <NavigationProperty Name="itensvenda" Relationship="Self.R_13" FromRole="venda" ToRole="itensvenda" />
+          <NavigationProperty Name="parcelasvenda" Relationship="Self.R_22" FromRole="venda" ToRole="parcelasvenda" />
+          <NavigationProperty Name="tipopagamento" Relationship="Self.R_23" FromRole="venda" ToRole="tipopagamento" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="R_10">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="cat_cod" />
+            </Principal>
+            <Dependent Role="subcategoria">
+              <PropertyRef Name="cat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_11">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="cat_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="cat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_20">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="venda" Type="Self.venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cli_cod" />
+            </Principal>
+            <Dependent Role="venda">
+              <PropertyRef Name="cli_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_15">
+          <End Role="compra" Type="Self.compra" Multiplicity="1" />
+          <End Role="itenscompra" Type="Self.itenscompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compra">
+              <PropertyRef Name="com_cod" />
+            </Principal>
+            <Dependent Role="itenscompra">
+              <PropertyRef Name="com_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="fornecedor" Type="Self.fornecedor" Multiplicity="0..1" />
+          <End Role="compra" Type="Self.compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="for_cod" />
+            </Principal>
+            <Dependent Role="compra">
+              <PropertyRef Name="for_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_24">
+          <End Role="tipopagamento" Type="Self.tipopagamento" Multiplicity="0..1" />
+          <End Role="compra" Type="Self.compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipopagamento">
+              <PropertyRef Name="tpa_cod" />
+            </Principal>
+            <Dependent Role="compra">
+              <PropertyRef Name="tpa_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_25">
+          <End Role="compra" Type="Self.compra" Multiplicity="1" />
+          <End Role="parcelascompra" Type="Self.parcelascompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compra">
+              <PropertyRef Name="com_cod" />
+            </Principal>
+            <Dependent Role="parcelascompra">
+              <PropertyRef Name="com_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="itenscompra" Type="Self.itenscompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="pro_cod" />
+            </Principal>
+            <Dependent Role="itenscompra">
+              <PropertyRef Name="pro_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_13">
+          <End Role="venda" Type="Self.venda" Multiplicity="1" />
+          <End Role="itensvenda" Type="Self.itensvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venda">
+              <PropertyRef Name="ven_cod" />
+            </Principal>
+            <Dependent Role="itensvenda">
+              <PropertyRef Name="ven_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="itensvenda" Type="Self.itensvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="pro_cod" />
+            </Principal>
+            <Dependent Role="itensvenda">
+              <PropertyRef Name="pro_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Role="venda" Type="Self.venda" Multiplicity="1" />
+          <End Role="parcelasvenda" Type="Self.parcelasvenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venda">
+              <PropertyRef Name="ven_cod" />
+            </Principal>
+            <Dependent Role="parcelasvenda">
+              <PropertyRef Name="ven_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategoria">
+              <PropertyRef Name="scat_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="scat_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_9">
+          <End Role="undmedida" Type="Self.undmedida" Multiplicity="0..1" />
+          <End Role="produto" Type="Self.produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="undmedida">
+              <PropertyRef Name="umed_cod" />
+            </Principal>
+            <Dependent Role="produto">
+              <PropertyRef Name="umed_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Role="tipopagamento" Type="Self.tipopagamento" Multiplicity="0..1" />
+          <End Role="venda" Type="Self.venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipopagamento">
+              <PropertyRef Name="tpa_cod" />
+            </Principal>
+            <Dependent Role="venda">
+              <PropertyRef Name="tpa_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Trabalho_DADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categoria" EntityType="Self.categoria" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="compra" EntityType="Self.compra" />
+          <EntitySet Name="fornecedor" EntityType="Self.fornecedor" />
+          <EntitySet Name="itenscompra" EntityType="Self.itenscompra" />
+          <EntitySet Name="itensvenda" EntityType="Self.itensvenda" />
+          <EntitySet Name="parcelascompra" EntityType="Self.parcelascompra" />
+          <EntitySet Name="parcelasvenda" EntityType="Self.parcelasvenda" />
+          <EntitySet Name="produto" EntityType="Self.produto" />
+          <EntitySet Name="subcategoria" EntityType="Self.subcategoria" />
+          <EntitySet Name="tipopagamento" EntityType="Self.tipopagamento" />
+          <EntitySet Name="undmedida" EntityType="Self.undmedida" />
+          <EntitySet Name="venda" EntityType="Self.venda" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="subcategoria" EntitySet="subcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="R_11" Association="Self.R_11">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="R_20" Association="Self.R_20">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="venda" EntitySet="venda" />
+          </AssociationSet>
+          <AssociationSet Name="R_15" Association="Self.R_15">
+            <End Role="compra" EntitySet="compra" />
+            <End Role="itenscompra" EntitySet="itenscompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="Self.R_21">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="compra" EntitySet="compra" />
+          </AssociationSet>
+          <AssociationSet Name="R_24" Association="Self.R_24">
+            <End Role="tipopagamento" EntitySet="tipopagamento" />
+            <End Role="compra" EntitySet="compra" />
+          </AssociationSet>
+          <AssociationSet Name="R_25" Association="Self.R_25">
+            <End Role="compra" EntitySet="compra" />
+            <End Role="parcelascompra" EntitySet="parcelascompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="Self.R_17">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="itenscompra" EntitySet="itenscompra" />
+          </AssociationSet>
+          <AssociationSet Name="R_13" Association="Self.R_13">
+            <End Role="venda" EntitySet="venda" />
+            <End Role="itensvenda" EntitySet="itensvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="itensvenda" EntitySet="itensvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="Self.R_22">
+            <End Role="venda" EntitySet="venda" />
+            <End Role="parcelasvenda" EntitySet="parcelasvenda" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="Self.R_12">
+            <End Role="subcategoria" EntitySet="subcategoria" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="R_9" Association="Self.R_9">
+            <End Role="undmedida" EntitySet="undmedida" />
+            <End Role="produto" EntitySet="produto" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="Self.R_23">
+            <End Role="tipopagamento" EntitySet="tipopagamento" />
+            <End Role="venda" EntitySet="venda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Trabalho_DADModelStoreContainer" CdmEntityContainer="Trabalho_DADEntities">
+          <EntitySetMapping Name="categoria">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.categoria">
+              <MappingFragment StoreEntitySet="categoria">
+                <ScalarProperty Name="cat_cod" ColumnName="cat_cod" />
+                <ScalarProperty Name="cat_nome" ColumnName="cat_nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="cli_cod" ColumnName="cli_cod" />
+                <ScalarProperty Name="cli_nome" ColumnName="cli_nome" />
+                <ScalarProperty Name="cli_cpfcnpj" ColumnName="cli_cpfcnpj" />
+                <ScalarProperty Name="cli_rgie" ColumnName="cli_rgie" />
+                <ScalarProperty Name="cli_rsocial" ColumnName="cli_rsocial" />
+                <ScalarProperty Name="cli_tipo" ColumnName="cli_tipo" />
+                <ScalarProperty Name="cli_cep" ColumnName="cli_cep" />
+                <ScalarProperty Name="cli_endereco" ColumnName="cli_endereco" />
+                <ScalarProperty Name="cli_bairro" ColumnName="cli_bairro" />
+                <ScalarProperty Name="cli_fone" ColumnName="cli_fone" />
+                <ScalarProperty Name="cli_cel" ColumnName="cli_cel" />
+                <ScalarProperty Name="cli_email" ColumnName="cli_email" />
+                <ScalarProperty Name="cli_endnumero" ColumnName="cli_endnumero" />
+                <ScalarProperty Name="cli_cidade" ColumnName="cli_cidade" />
+                <ScalarProperty Name="cli_estado" ColumnName="cli_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compra">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.compra">
+              <MappingFragment StoreEntitySet="compra">
+                <ScalarProperty Name="com_cod" ColumnName="com_cod" />
+                <ScalarProperty Name="com_data" ColumnName="com_data" />
+                <ScalarProperty Name="com_nfiscal" ColumnName="com_nfiscal" />
+                <ScalarProperty Name="com_total" ColumnName="com_total" />
+                <ScalarProperty Name="com_nparcelas" ColumnName="com_nparcelas" />
+                <ScalarProperty Name="com_status" ColumnName="com_status" />
+                <ScalarProperty Name="for_cod" ColumnName="for_cod" />
+                <ScalarProperty Name="tpa_cod" ColumnName="tpa_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedor">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.fornecedor">
+              <MappingFragment StoreEntitySet="fornecedor">
+                <ScalarProperty Name="for_cod" ColumnName="for_cod" />
+                <ScalarProperty Name="for_nome" ColumnName="for_nome" />
+                <ScalarProperty Name="for_rsocial" ColumnName="for_rsocial" />
+                <ScalarProperty Name="for_ie" ColumnName="for_ie" />
+                <ScalarProperty Name="for_cnpj" ColumnName="for_cnpj" />
+                <ScalarProperty Name="for_cep" ColumnName="for_cep" />
+                <ScalarProperty Name="for_endereco" ColumnName="for_endereco" />
+                <ScalarProperty Name="for_bairro" ColumnName="for_bairro" />
+                <ScalarProperty Name="for_fone" ColumnName="for_fone" />
+                <ScalarProperty Name="for_cel" ColumnName="for_cel" />
+                <ScalarProperty Name="for_email" ColumnName="for_email" />
+                <ScalarProperty Name="for_endnumero" ColumnName="for_endnumero" />
+                <ScalarProperty Name="for_cidade" ColumnName="for_cidade" />
+                <ScalarProperty Name="for_estado" ColumnName="for_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itenscompra">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.itenscompra">
+              <MappingFragment StoreEntitySet="itenscompra">
+                <ScalarProperty Name="itc_cod" ColumnName="itc_cod" />
+                <ScalarProperty Name="itc_qtde" ColumnName="itc_qtde" />
+                <ScalarProperty Name="itc_valor" ColumnName="itc_valor" />
+                <ScalarProperty Name="com_cod" ColumnName="com_cod" />
+                <ScalarProperty Name="pro_cod" ColumnName="pro_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itensvenda">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.itensvenda">
+              <MappingFragment StoreEntitySet="itensvenda">
+                <ScalarProperty Name="itv_cod" ColumnName="itv_cod" />
+                <ScalarProperty Name="itv_qtde" ColumnName="itv_qtde" />
+                <ScalarProperty Name="itv_valor" ColumnName="itv_valor" />
+                <ScalarProperty Name="ven_cod" ColumnName="ven_cod" />
+                <ScalarProperty Name="pro_cod" ColumnName="pro_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parcelascompra">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.parcelascompra">
+              <MappingFragment StoreEntitySet="parcelascompra">
+                <ScalarProperty Name="pco_cod" ColumnName="pco_cod" />
+                <ScalarProperty Name="pco_valor" ColumnName="pco_valor" />
+                <ScalarProperty Name="pco_datapagto" ColumnName="pco_datapagto" />
+                <ScalarProperty Name="pco_datavecto" ColumnName="pco_datavecto" />
+                <ScalarProperty Name="com_cod" ColumnName="com_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parcelasvenda">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.parcelasvenda">
+              <MappingFragment StoreEntitySet="parcelasvenda">
+                <ScalarProperty Name="ven_cod" ColumnName="ven_cod" />
+                <ScalarProperty Name="pve_cod" ColumnName="pve_cod" />
+                <ScalarProperty Name="pve_valor" ColumnName="pve_valor" />
+                <ScalarProperty Name="pve_datapagto" ColumnName="pve_datapagto" />
+                <ScalarProperty Name="pve_datavecto" ColumnName="pve_datavecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produto">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.produto">
+              <MappingFragment StoreEntitySet="produto">
+                <ScalarProperty Name="pro_cod" ColumnName="pro_cod" />
+                <ScalarProperty Name="pro_nome" ColumnName="pro_nome" />
+                <ScalarProperty Name="pro_descricao" ColumnName="pro_descricao" />
+                <ScalarProperty Name="pro_foto" ColumnName="pro_foto" />
+                <ScalarProperty Name="pro_valorpago" ColumnName="pro_valorpago" />
+                <ScalarProperty Name="pro_valorvenda" ColumnName="pro_valorvenda" />
+                <ScalarProperty Name="pro_qtde" ColumnName="pro_qtde" />
+                <ScalarProperty Name="umed_cod" ColumnName="umed_cod" />
+                <ScalarProperty Name="cat_cod" ColumnName="cat_cod" />
+                <ScalarProperty Name="scat_cod" ColumnName="scat_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subcategoria">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.subcategoria">
+              <MappingFragment StoreEntitySet="subcategoria">
+                <ScalarProperty Name="scat_cod" ColumnName="scat_cod" />
+                <ScalarProperty Name="scat_nome" ColumnName="scat_nome" />
+                <ScalarProperty Name="cat_cod" ColumnName="cat_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipopagamento">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.tipopagamento">
+              <MappingFragment StoreEntitySet="tipopagamento">
+                <ScalarProperty Name="tpa_cod" ColumnName="tpa_cod" />
+                <ScalarProperty Name="tpa_nome" ColumnName="tpa_nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="undmedida">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.undmedida">
+              <MappingFragment StoreEntitySet="undmedida">
+                <ScalarProperty Name="umed_cod" ColumnName="umed_cod" />
+                <ScalarProperty Name="umed_nome" ColumnName="umed_nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="venda">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.venda">
+              <MappingFragment StoreEntitySet="venda">
+                <ScalarProperty Name="ven_cod" ColumnName="ven_cod" />
+                <ScalarProperty Name="ven_data" ColumnName="ven_data" />
+                <ScalarProperty Name="ven_nfiscal" ColumnName="ven_nfiscal" />
+                <ScalarProperty Name="ven_total" ColumnName="ven_total" />
+                <ScalarProperty Name="ven_nparcelas" ColumnName="ven_nparcelas" />
+                <ScalarProperty Name="ven_status" ColumnName="ven_status" />
+                <ScalarProperty Name="cli_cod" ColumnName="cli_cod" />
+                <ScalarProperty Name="tpa_cod" ColumnName="tpa_cod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="Trabalho_DADModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
