@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Web_Service.Models;
 using Web_Service.POCO;
 
 namespace Web_Service.Controllers
 {
+    [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class ProdutoController : ApiController
     {
         private TrabalhoDADEntities contexto = new TrabalhoDADEntities();

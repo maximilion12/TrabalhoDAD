@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using Web_Service.POCO;
 using Web_Service.Models;
+using System.Web.Http.Cors;
 
 namespace Web_Service.Controllers
 {
+    [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class FornecedorController : ApiController
     {
         private TrabalhoDADEntities contexto = new TrabalhoDADEntities();

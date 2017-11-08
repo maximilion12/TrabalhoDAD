@@ -7,11 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Web_Service.Models;
 
 namespace Web_Service.Controllers
 {
+    [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class categoriasController : ApiController
     {
         private TrabalhoDADEntities db = new TrabalhoDADEntities();

@@ -7,9 +7,11 @@ using System.Web.Http;
 using Web_Service.POCO;
 using Web_Service.Models;
 using System.Data.Entity;
+using System.Web.Http.Cors;
 
 namespace Web_Service.Controllers
 {
+    [EnableCors(origins: "*", methods: "*", headers: "*")]
     public class CategoriaController : ApiController
     {
         private TrabalhoDADEntities contexto = new TrabalhoDADEntities();
